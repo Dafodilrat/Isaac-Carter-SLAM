@@ -1,0 +1,46 @@
+# syntax=docker/dockerfile:1.4
+
+# --- Stage 1: Isaac Sim Downloader ---
+FROM alpine AS downloader
+WORKDIR /isaac-sim
+RUN apk add --no-cache wget unzip
+RUN wget -c https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone-4.5.0-linux-x86_64.zip -O isaac-sim.zip
+RUN unzip isaac-sim.zip 
+RUN rm isaac-sim.zip
+
+# --- Stage 2: Main image ---
+FROM ros:humble-perception
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOCKER_USER_HOME=/root
+
+# Python venv
+ENV VIRTUAL_ENV=/isaac
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN apt update && apt install -y python3-pip ros-humble-rviz2 && pip install --upgrade pip
+
+# Basic utilities
+RUN apt-get update && apt-get install -y \
+    git vim cmake build-essential unzip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy Isaac Sim from downloader stage
+COPY --from=downloader /isaac-sim /isaac-sim
+
+# Environment variables
+ENV ISAACSIM_PATH=/isaac-sim
+# ENV PYTHONPATH=${ISAACLAB_PATH}/source:${PYTHONPATH}
+
+# Source ROS2 and Isaac paths
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
+    echo "export ISAACSIM_PATH=${ISAACSIM_PATH}" >> /root/.bashrc &&\
+    echo "export ROS_DISTRO=humble" >> /root/.bashrc && \
+    echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> /root/.bashrc &&\
+    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib" >> /root/.bashrc
+
+COPY docker/isaac_entrypoint.sh /isaac_entrypoint.sh
+
+RUN chmod +x /isaac_entrypoint.sh
+
+# ros2 workspace setup
+WORKDIR /IsaacPanda

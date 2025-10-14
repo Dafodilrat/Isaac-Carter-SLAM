@@ -1,0 +1,82 @@
+services:
+  isaac_slam:
+    shm_size: 8g
+    build:
+      context: ../
+      dockerfile: docker/isaac_dockerfile
+    image: isaac_panda:isaacsim-4.5
+    container_name: isaac_slam_container
+    runtime: nvidia
+    # network_mode: "host"
+    restart: unless-stopped
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ACCEPT_EULA=Y
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      - OMNI_KIT_ALLOW_ROOT=1
+      - X11_FORWARDING_ENABLED=1
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - LD_LIBRARY_PATH=/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib:$LD_LIBRARY_PATH
+      - ROS_DOMAIN_ID=0
+      - ROS_DISTRO=humble
+      - KIT_DISABLE_CRASH_REPORTING=1
+      - KIT_USE_VULKAN_DEBUG_LAYER=0
+      - __GL_THREADED_OPTIMIZATIONS=0
+      - __GL_SYNC_TO_VBLANK=0
+      - ENABLE_AFTERMATH=0
+      - PHYSX_WARMSTART=0
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix 
+      - $HOME/.Xauthority:/root/.Xauthority:rw  
+      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam:/isaac_slam
+      - $HOME/.nvidia-omniverse:/root/.nvidia-omniverse
+      - $HOME/.cache/warp:/root/.cache/warp
+      - $HOME/.cache/ov:/root/.cache/ov
+      - $HOME/.local/share/ov:/root/.local/share/ov
+      - /usr/share/vulkan/explicit_layer.d:/usr/share/vulkan/explicit_layer.d:ro  
+
+    #entrypoint: ["/isaac_entrypoint.sh"]
+    entrypoint : ["/isaac_entrypoint.sh"]
+  ros2-movit2-humble:
+    build:
+      context: ../
+      dockerfile: docker/movit_dockerfile
+    image: ros2-movit2-humble:latest
+    container_name: ros2-movit2-humble-container
+    runtime: nvidia
+    # restart: unless-stopped
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - QT_QPA_PLATFORM=xcb
+      - LIBGL_ALWAYS_INDIRECT=0
+      - LIBGL_ALWAYS_SOFTWARE=0
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
+      # Optional stability flags
+      - MESA_GL_VERSION_OVERRIDE=3.3
+      - MESA_GLSL_VERSION_OVERRIDE=330
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix 
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam/slam_ws:/slam_ws 
+    tty: true
+    stdin_open: true
+    entrypoint: ["/movit_entrypoint.sh"]
+    # volumes:
+    #   - ./ros_ws:/ros_ws   # optional, mount your workspace
