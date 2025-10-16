@@ -1,0 +1,36 @@
+# Base ROS 2 Humble image
+FROM ros:humble-ros-base
+
+# Avoid interactive prompts during package installs
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Common development tools + SLAM essentials
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    python3-colcon-common-extensions \
+    ros-humble-rviz2 \
+    ros-humble-tf2-tools \
+    ros-humble-rqt \
+    ros-humble-rqt-common-plugins \
+    ros-humble-ros2-control \
+    ros-humble-ros2-controllers \
+    ros-humble-xacro \
+    ros-humble-teleop-twist-keyboard \
+    ros-humble-teleop-twist-joy \
+    ros-humble-slam-toolbox \
+    ros-humble-nav2-bringup \
+    ros-humble-cartographer-ros \
+    ros-humble-cartographer-rviz 
+
+COPY docker/slam_entrypoint.sh /slam_entrypoint.sh
+
+RUN chmod +x /slam_entrypoint.sh
+    # Source ROS setup automatically in container shell
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
+    echo "source /slam_ws/install/setup.bash" >> /root/.bashrc && \
+    echo "export ROS_DISTRO=humble" >> /root/.bashrc && \
+    echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> /root/.bashrc
+
+COPY docker/xbox.config.yaml /xbox.config.yaml
+
+WORKDIR /slam_ws

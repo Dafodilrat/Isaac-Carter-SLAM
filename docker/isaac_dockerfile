@@ -9,7 +9,7 @@ RUN unzip isaac-sim.zip
 RUN rm isaac-sim.zip
 
 # --- Stage 2: Main image ---
-FROM ros:humble-perception
+FROM rwthika/ros2-cuda:humble-ros-base
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOCKER_USER_HOME=/root
 

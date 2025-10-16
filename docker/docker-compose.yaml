@@ -4,7 +4,7 @@ services:
     build:
       context: ../
       dockerfile: docker/isaac_dockerfile
-    image: isaac_panda:isaacsim-4.5
+    image: isaac_slam:isaacsim-4.5
     container_name: isaac_slam_container
     runtime: nvidia
     # network_mode: "host"
@@ -47,13 +47,14 @@ services:
 
     #entrypoint: ["/isaac_entrypoint.sh"]
     entrypoint : ["/isaac_entrypoint.sh"]
-  ros2-movit2-humble:
+  ros2_slam:
     build:
       context: ../
-      dockerfile: docker/movit_dockerfile
-    image: ros2-movit2-humble:latest
-    container_name: ros2-movit2-humble-container
+      dockerfile: docker/slam_dockerfile
+    image: ros2-slam-humble:latest
+    container_name: ros2-slam-container
     runtime: nvidia
+    privileged: true
     # restart: unless-stopped
     environment:
       - DISPLAY=${DISPLAY}
@@ -74,9 +75,10 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix 
       - $HOME/.Xauthority:/root/.Xauthority:rw
-      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam/slam_ws:/slam_ws 
+      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam/slam_ws:/slam_ws
+      - /dev/input:/dev/input 
     tty: true
     stdin_open: true
-    entrypoint: ["/movit_entrypoint.sh"]
+    entrypoint: ["/slam_entrypoint.sh"]
     # volumes:
     #   - ./ros_ws:/ros_ws   # optional, mount your workspace
