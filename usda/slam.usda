@@ -7,8 +7,8 @@
                 double radius = 5
             }
             dictionary Perspective = {
-                double3 position = (-10.805485120347301, -5.129457932666746, 3.125128431307926)
-                double3 target = (-8.357065222243461, 25.591015446852744, -14.23244869176529)
+                double3 position = (-8.669268079824747, -4.624320001697907, 2.875496204685059)
+                double3 target = (-15.142320532521062, 25.569481706830818, -14.192854185527615)
             }
             dictionary Right = {
                 double3 position = (0, -5, 0)
@@ -40,90 +40,93 @@
 
 def Xform "World"
 {
-    def Xform "carter_v1_physx_lidar" (
-        prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Robots/Carter/carter_v1_physx_lidar.usd@
+    def Xform "full_warehouse" (
+        customData = {
+            dictionary omni = {
+                dictionary kit = {
+                    bool locked = 1
+                }
+            }
+        }
+        prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Environments/Simple_Warehouse/full_warehouse.usd@
+    )
+    {
+        rel proxyPrim (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+        uniform token purpose (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+        token visibility (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+        double3 xformOp:rotateXYZ (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+        double3 xformOp:scale (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+        double3 xformOp:translate (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+        uniform token[] xformOpOrder (
+            customData = {
+                dictionary omni = {
+                    dictionary kit = {
+                        bool locked = 1
+                    }
+                }
+            }
+        )
+    }
+
+    def Xform "carter_v1" (
+        prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Robots/Carter/carter_v1.usd@
     )
     {
         quatd xformOp:orient = (1, 0, 0, 0)
         double3 xformOp:scale = (1, 1, 1)
-        double3 xformOp:translate = (-10.215325355529785, 0, 0.23736493289470673)
+        double3 xformOp:translate = (-8.856132131618022, 0, 0.2545468072703499)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "chassis_link"
         {
-            custom string isaac:nameOverride = "carter" (
-                displayName = "Name Override"
-                doc = "Name override for prim lookup in base name search"
-            )
-
-            over "carter_lidar" (
-                active = false
-            )
-            {
-                float3 xformOp:rotateZYX = (0, 0, 0)
-                float3 xformOp:scale = (1, 1, 1)
-                double3 xformOp:translate = (-0.05999999865889549, 0, 0.3799999915063381)
-                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
-
-                def Camera "Rotating" (
-                    prepend apiSchemas = ["IsaacRtxLidarSensorAPI"]
-                )
-                {
-                    token cameraSensorType = "lidar" (
-                        allowedTokens = ["camera", "radar", "lidar"]
-                    )
-                    string sensorModelConfig = "Example_Rotary"
-                    string sensorModelPluginName = "omni.sensors.nv.lidar.lidar_core.plugin"
-                    token visibility = "invisible"
-                    quatd xformOp:orient = (1, 0, 0, 0)
-                    double3 xformOp:scale = (1, 1, 1)
-                    double3 xformOp:translate = (0, 0, 0)
-                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-                }
-            }
-
-            over "left_wheel"
-            {
-                float drive:angular:physics:targetPosition = 0
-                float drive:angular:physics:targetVelocity = 0
-                float physics:lowerLimit = -inf
-                float physics:upperLimit = inf
-            }
-
-            over "right_wheel"
-            {
-                float drive:angular:physics:targetVelocity = 0
-                float physics:lowerLimit = -inf
-                float physics:upperLimit = inf
-            }
-
-            over "rear_pivot"
-            {
-                float physics:lowerLimit = -inf
-                float physics:upperLimit = inf
-            }
-        }
-
-        def Xform "Velodyne_VLS_128" (
-            prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Sensors/Velodyne/vls-128/vls_128.usd@
-        )
-        {
-            quatd xformOp:orient = (1, 0, 0, 0)
-            double3 xformOp:scale = (0.6857264687407238, 0.6400000000007812, 0.6400000000007812)
-            double3 xformOp:translate = (-0.055884864287876646, 0, 0.3738491502039878)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-            def PhysicsFixedJoint "FixedJoint"
-            {
-                rel physics:body0 = </World/carter_v1_physx_lidar>
-                rel physics:body1 = </World/carter_v1_physx_lidar/chassis_link>
-                float physics:breakForce = inf
-                float physics:breakTorque = inf
-                point3f physics:localPos0 = (-0.055884864, 0, 0.37384915)
-                point3f physics:localPos1 = (-0.05821891, -8.7140785e-7, 0.36974937)
-                quatf physics:localRot0 = (1, 0, 0, 0)
-                quatf physics:localRot1 = (0.99999803, 6.509944e-7, -0.0019834065, -0.0000010622937)
-            }
         }
 
         over "left_wheel_link"
@@ -136,11 +139,6 @@ def Xform "World"
 
         over "rear_pivot_link"
         {
-            over "rear_axle"
-            {
-                float physics:lowerLimit = -inf
-                float physics:upperLimit = inf
-            }
         }
 
         over "rear_wheel_link"
@@ -154,12 +152,28 @@ def Xform "World"
         over "imu"
         {
         }
-    }
 
-    def Xform "full_warehouse" (
-        prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Environments/Simple_Warehouse/full_warehouse.usd@
-    )
-    {
+        def Xform "Velodyne_VLS_128" (
+            prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Sensors/Velodyne/vls-128/vls_128.usd@
+        )
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.6857264637947083, 0.6399999856948853, 0.6399999856948853)
+            double3 xformOp:translate = (-0.05690209749343822, 0, 0.37821510576766587)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def PhysicsFixedJoint "FixedJoint"
+            {
+                rel physics:body0 = </World/carter_v1/chassis_link>
+                rel physics:body1 = </World/carter_v1/Velodyne_VLS_128>
+                float physics:breakForce = inf
+                float physics:breakTorque = inf
+                point3f physics:localPos0 = (-0.05916928, -3.1842583e-7, 0.3880898)
+                point3f physics:localPos1 = (0, 0, 0)
+                quatf physics:localRot0 = (0.9999977, 3.408666e-7, -0.0021561903, 4.1827877e-7)
+                quatf physics:localRot1 = (1, 0, 0, 0)
+            }
+        }
     }
 }
 
@@ -237,7 +251,7 @@ def "Graph"
 
         def OmniGraphNode "RenderProduct"
         {
-            custom rel inputs:cameraPrim = </World/carter_v1_physx_lidar/Velodyne_VLS_128/Velodyne_VLS_128> (
+            custom rel inputs:cameraPrim = </World/carter_v1/Velodyne_VLS_128/Velodyne_VLS_128> (
                 customData = {
                     dictionary omni = {
                         dictionary graph = {
@@ -481,7 +495,7 @@ def "Graph"
 
         def OmniGraphNode "ComputeOdometry"
         {
-            custom rel inputs:chassisPrim = </World/carter_v1_physx_lidar/chassis_link> (
+            custom rel inputs:chassisPrim = </World/carter_v1/chassis_link> (
                 customData = {
                     dictionary omni = {
                         dictionary graph = {
@@ -565,7 +579,7 @@ def "Graph"
             custom string inputs:qosProfile
             custom uint64 inputs:queueSize
             custom bool inputs:staticPublisher
-            custom rel inputs:targetPrims = </World/carter_v1_physx_lidar/chassis_link> (
+            custom rel inputs:targetPrims = </World/carter_v1/chassis_link> (
                 customData = {
                     dictionary omni = {
                         dictionary graph = {
@@ -631,7 +645,7 @@ def "Graph"
             token node:type = "isaacsim.robot.wheeled_robots.DifferentialController"
             int node:typeVersion = 1
             custom double[] outputs:velocityCommand
-            uniform token ui:nodegraph:node:expansionState = "open"
+            uniform token ui:nodegraph:node:expansionState = "minimized"
             uniform float2 ui:nodegraph:node:pos = (239.09924, 284.39133)
         }
 
@@ -650,7 +664,7 @@ def "Graph"
             custom token[] inputs:jointNames = ["right_wheel", "left_wheel"]
             custom double[] inputs:positionCommand
             custom string inputs:robotPath = ""
-            custom rel inputs:targetPrim = </World/carter_v1_physx_lidar> (
+            custom rel inputs:targetPrim = </World/carter_v1> (
                 customData = {
                     dictionary omni = {
                         dictionary graph = {
