@@ -7,8 +7,8 @@
                 double radius = 5
             }
             dictionary Perspective = {
-                double3 position = (-8.669268079824747, -4.624320001697907, 2.875496204685059)
-                double3 target = (-15.142320532521062, 25.569481706830818, -14.192854185527615)
+                double3 position = (-7.4001650849889495, -3.580289383513113, 2.667980001586285)
+                double3 target = (-22.882753882084756, 27.041534142859454, -0.1276764454980377)
             }
             dictionary Right = {
                 double3 position = (0, -5, 0)
@@ -117,16 +117,45 @@ def Xform "World"
     }
 
     def Xform "carter_v1" (
+        delete apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+        prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
         prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Robots/Carter/carter_v1.usd@
     )
     {
         quatd xformOp:orient = (1, 0, 0, 0)
         double3 xformOp:scale = (1, 1, 1)
-        double3 xformOp:translate = (-8.856132131618022, 0, 0.2545468072703499)
+        double3 xformOp:translate = (-8.856132507324219, 0, 1.8062578439712524)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        over "chassis_link"
+        over "chassis_link" (
+            delete apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI"]
+        )
         {
+            bool physics:kinematicEnabled = 0
+            bool physics:rigidBodyEnabled = 1
+            quatf xformOp:orient = (0.9999977, -3.408666e-7, 0.0021561903, -4.1827877e-7)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0.0005930460856919118, 4.9674234814307036e-9, -0.010126256716409543)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "box" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI"]
+            )
+            {
+                bool physics:collisionEnabled = 1
+            }
+
+            over "chassis_obj"
+            {
+                over "carter_main" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI", "PhysicsMeshCollisionAPI"]
+                )
+                {
+                    uniform token physics:approximation = "convexHull"
+                    bool physics:collisionEnabled = 1
+                }
+            }
         }
 
         over "left_wheel_link"
@@ -154,9 +183,12 @@ def Xform "World"
         }
 
         def Xform "Velodyne_VLS_128" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI"]
             prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Sensors/Velodyne/vls-128/vls_128.usd@
         )
         {
+            bool physics:kinematicEnabled = 0
+            bool physics:rigidBodyEnabled = 1
             quatd xformOp:orient = (1, 0, 0, 0)
             double3 xformOp:scale = (0.6857264637947083, 0.6399999856948853, 0.6399999856948853)
             double3 xformOp:translate = (-0.05690209749343822, 0, 0.37821510576766587)
@@ -173,6 +205,13 @@ def Xform "World"
                 quatf physics:localRot0 = (0.9999977, 3.408666e-7, -0.0021561903, 4.1827877e-7)
                 quatf physics:localRot1 = (1, 0, 0, 0)
             }
+        }
+
+        over "WheelMaterial"
+        {
+            float physics:dynamicFriction = 1.5
+            float physics:staticFriction = 1.5
+            uniform token physxMaterial:frictionCombineMode = "multiply"
         }
     }
 }
