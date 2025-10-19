@@ -1,0 +1,34 @@
+[0.375s] Invoking command in '/slam_ws/build/isaac_slam_config': PYTHONPATH=/slam_ws/build/isaac_slam_config/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/slam_ws/install/isaac_slam_config/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /slam_ws/build/isaac_slam_config/build --no-deps symlink_data
+[0.523s] running develop
+[0.591s] running egg_info
+[0.591s] creating isaac_slam_config.egg-info
+[0.591s] writing isaac_slam_config.egg-info/PKG-INFO
+[0.592s] writing dependency_links to isaac_slam_config.egg-info/dependency_links.txt
+[0.592s] writing entry points to isaac_slam_config.egg-info/entry_points.txt
+[0.592s] writing requirements to isaac_slam_config.egg-info/requires.txt
+[0.592s] writing top-level names to isaac_slam_config.egg-info/top_level.txt
+[0.592s] writing manifest file 'isaac_slam_config.egg-info/SOURCES.txt'
+[0.593s] reading manifest file 'isaac_slam_config.egg-info/SOURCES.txt'
+[0.593s] writing manifest file 'isaac_slam_config.egg-info/SOURCES.txt'
+[0.594s] running build_ext
+[0.594s] Creating /slam_ws/install/isaac_slam_config/lib/python3.10/site-packages/isaac-slam-config.egg-link (link to .)
+[0.595s] 
+[0.595s] Installed /slam_ws/build/isaac_slam_config
+[0.595s] running symlink_data
+[0.595s] creating /slam_ws/install/isaac_slam_config/share/ament_index
+[0.595s] creating /slam_ws/install/isaac_slam_config/share/ament_index/resource_index
+[0.595s] creating /slam_ws/install/isaac_slam_config/share/ament_index/resource_index/packages
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/resource/isaac_slam_config -> /slam_ws/install/isaac_slam_config/share/ament_index/resource_index/packages
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/package.xml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config
+[0.595s] creating /slam_ws/install/isaac_slam_config/share/isaac_slam_config/launch
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/launch/navigation.launch.py -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/launch
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/launch/mapping.launch.py -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/launch
+[0.595s] creating /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/config/mapper_params_online_async.yaml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/config/nav2_params.yaml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config
+[0.595s] creating /slam_ws/install/isaac_slam_config/share/isaac_slam_config/maps
+[0.595s] symbolically linking /slam_ws/build/isaac_slam_config/maps/warehouse.yaml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/maps
+[0.596s] symbolically linking /slam_ws/build/isaac_slam_config/maps/warehouse.pgm -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/maps
+[0.596s] symbolically linking /slam_ws/build/isaac_slam_config/config/mapping.rviz -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config
+[0.596s] symbolically linking /slam_ws/build/isaac_slam_config/config/slam_toolbox_default.rviz -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config
+[0.613s] Invoked command in '/slam_ws/build/isaac_slam_config' returned '0': PYTHONPATH=/slam_ws/build/isaac_slam_config/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/slam_ws/install/isaac_slam_config/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /slam_ws/build/isaac_slam_config/build --no-deps symlink_data

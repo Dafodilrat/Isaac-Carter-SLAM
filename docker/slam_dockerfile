@@ -5,7 +5,8 @@ FROM ros:humble-ros-base
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Common development tools + SLAM essentials
-RUN apt-get update && apt-get install -y \
+RUN apt-get update
+RUN apt-get install -y \
     python3-pip \
     python3-colcon-common-extensions \
     ros-humble-rviz2 \
@@ -18,19 +19,20 @@ RUN apt-get update && apt-get install -y \
     ros-humble-teleop-twist-keyboard \
     ros-humble-teleop-twist-joy \
     ros-humble-slam-toolbox \
-    ros-humble-nav2-bringup \
     ros-humble-cartographer-ros \
-    ros-humble-cartographer-rviz 
+    ros-humble-cartographer-rviz \
+    ros-humble-navigation2 \
+    ros-humble-nav2-bringup 
 
-COPY docker/slam_entrypoint.sh /slam_entrypoint.sh
+COPY docker/entrypoints/slam_entrypoint.sh /slam_entrypoint.sh
+COPY docker/entrypoints/controller_entrypoint.sh /controller_entrypoint.sh
 
 RUN chmod +x /slam_entrypoint.sh
+RUN chmod +x /controller_entrypoint.sh
     # Source ROS setup automatically in container shell
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
     echo "source /slam_ws/install/setup.bash" >> /root/.bashrc && \
     echo "export ROS_DISTRO=humble" >> /root/.bashrc && \
     echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> /root/.bashrc
-
-COPY docker/xbox.config.yaml /xbox.config.yaml
 
 WORKDIR /slam_ws

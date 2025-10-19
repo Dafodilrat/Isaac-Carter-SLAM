@@ -30,7 +30,13 @@ COPY --from=downloader /isaac-sim /isaac-sim
 ENV ISAACSIM_PATH=/isaac-sim
 # ENV PYTHONPATH=${ISAACLAB_PATH}/source:${PYTHONPATH}
 
-# Source ROS2 and Isaac paths
+# --- Make the RTX sensors extension writable ---
+# 1. Copy it to a temporary folder on the upper layer.
+# 2. Replace the original with the writable copy.
+RUN cp -r /isaac-sim/exts/isaacsim.sensors.rtx /isaac-sim/isaacsim.sensors.rtx.tmp && \
+    rm -rf /isaac-sim/exts/isaacsim.sensors.rtx && \
+    mv /isaac-sim/isaacsim.sensors.rtx.tmp /isaac-sim/exts/isaacsim.sensors.rtx && \
+    chmod -R a+rw /isaac-sim/exts/isaacsim.sensors.rtx
 
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
     echo "export ISAACSIM_PATH=${ISAACSIM_PATH}" >> /root/.bashrc &&\
@@ -38,7 +44,7 @@ RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
     echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> /root/.bashrc &&\
     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib" >> /root/.bashrc
 
-COPY docker/isaac_entrypoint.sh /isaac_entrypoint.sh
+COPY docker/entrypoints/isaac_entrypoint.sh /isaac_entrypoint.sh
 
 RUN chmod +x /isaac_entrypoint.sh
 

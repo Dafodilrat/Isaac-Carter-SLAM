@@ -1,0 +1,45 @@
+[0.000000] (-) TimerEvent: {}
+[0.000175] (isaac_slam_config) JobQueued: {'identifier': 'isaac_slam_config', 'dependencies': OrderedDict()}
+[0.000549] (isaac_slam_config) JobStarted: {'identifier': 'isaac_slam_config'}
+[0.099809] (-) TimerEvent: {}
+[0.200033] (-) TimerEvent: {}
+[0.300247] (-) TimerEvent: {}
+[0.374822] (isaac_slam_config) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/slam_ws/build/isaac_slam_config/build', '--no-deps', 'symlink_data'], 'cwd': '/slam_ws/build/isaac_slam_config', 'env': {'HOSTNAME': '53d3e4b14e72', 'MODE': 'navigation', '__GLX_VENDOR_LIBRARY_NAME': 'nvidia', 'SHLVL': '1', 'LIBGL_ALWAYS_SOFTWARE': '0', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/slam_ws', 'ROS_PYTHON_VERSION': '3', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'NVIDIA_DRIVER_CAPABILITIES': 'all', 'TERM': 'xterm', 'LIBGL_ALWAYS_INDIRECT': '0', 'ROS_LOCALHOST_ONLY': '0', 'QT_X11_NO_MITSHM': '1', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'XDG_RUNTIME_DIR': '/tmp/runtime-root', 'DISPLAY': ':1', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_fastrtps_cpp', 'ROS_DOMAIN_ID': '0', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'DEBIAN_FRONTEND': 'noninteractive', 'PWD': '/slam_ws/build/isaac_slam_config', 'QT_QPA_PLATFORM': 'xcb', 'LC_ALL': 'C.UTF-8', 'MESA_GL_VERSION_OVERRIDE': '3.3', 'PYTHONPATH': '/slam_ws/build/isaac_slam_config/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/slam_ws/install/isaac_slam_config/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'NVIDIA_VISIBLE_DEVICES': 'all', 'COLCON': '1', 'MESA_GLSL_VERSION_OVERRIDE': '330'}, 'shell': False}
+[0.400325] (-) TimerEvent: {}
+[0.500513] (-) TimerEvent: {}
+[0.523117] (isaac_slam_config) StdoutLine: {'line': b'running develop\n'}
+[0.591733] (isaac_slam_config) StdoutLine: {'line': b'running egg_info\n'}
+[0.591885] (isaac_slam_config) StdoutLine: {'line': b'creating isaac_slam_config.egg-info\n'}
+[0.591960] (isaac_slam_config) StdoutLine: {'line': b'writing isaac_slam_config.egg-info/PKG-INFO\n'}
+[0.592048] (isaac_slam_config) StdoutLine: {'line': b'writing dependency_links to isaac_slam_config.egg-info/dependency_links.txt\n'}
+[0.592192] (isaac_slam_config) StdoutLine: {'line': b'writing entry points to isaac_slam_config.egg-info/entry_points.txt\n'}
+[0.592247] (isaac_slam_config) StdoutLine: {'line': b'writing requirements to isaac_slam_config.egg-info/requires.txt\n'}
+[0.592285] (isaac_slam_config) StdoutLine: {'line': b'writing top-level names to isaac_slam_config.egg-info/top_level.txt\n'}
+[0.592343] (isaac_slam_config) StdoutLine: {'line': b"writing manifest file 'isaac_slam_config.egg-info/SOURCES.txt'\n"}
+[0.593304] (isaac_slam_config) StdoutLine: {'line': b"reading manifest file 'isaac_slam_config.egg-info/SOURCES.txt'\n"}
+[0.593777] (isaac_slam_config) StdoutLine: {'line': b"writing manifest file 'isaac_slam_config.egg-info/SOURCES.txt'\n"}
+[0.594607] (isaac_slam_config) StdoutLine: {'line': b'running build_ext\n'}
+[0.594702] (isaac_slam_config) StdoutLine: {'line': b'Creating /slam_ws/install/isaac_slam_config/lib/python3.10/site-packages/isaac-slam-config.egg-link (link to .)\n'}
+[0.595245] (isaac_slam_config) StdoutLine: {'line': b'\n'}
+[0.595337] (isaac_slam_config) StdoutLine: {'line': b'Installed /slam_ws/build/isaac_slam_config\n'}
+[0.595387] (isaac_slam_config) StdoutLine: {'line': b'running symlink_data\n'}
+[0.595455] (isaac_slam_config) StdoutLine: {'line': b'creating /slam_ws/install/isaac_slam_config/share/ament_index\n'}
+[0.595499] (isaac_slam_config) StdoutLine: {'line': b'creating /slam_ws/install/isaac_slam_config/share/ament_index/resource_index\n'}
+[0.595540] (isaac_slam_config) StdoutLine: {'line': b'creating /slam_ws/install/isaac_slam_config/share/ament_index/resource_index/packages\n'}
+[0.595603] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/resource/isaac_slam_config -> /slam_ws/install/isaac_slam_config/share/ament_index/resource_index/packages\n'}
+[0.595647] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/package.xml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config\n'}
+[0.595687] (isaac_slam_config) StdoutLine: {'line': b'creating /slam_ws/install/isaac_slam_config/share/isaac_slam_config/launch\n'}
+[0.595726] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/launch/navigation.launch.py -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/launch\n'}
+[0.595787] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/launch/mapping.launch.py -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/launch\n'}
+[0.595870] (isaac_slam_config) StdoutLine: {'line': b'creating /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config\n'}
+[0.595909] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/config/mapper_params_online_async.yaml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config\n'}
+[0.595944] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/config/nav2_params.yaml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config\n'}
+[0.595978] (isaac_slam_config) StdoutLine: {'line': b'creating /slam_ws/install/isaac_slam_config/share/isaac_slam_config/maps\n'}
+[0.596011] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/maps/warehouse.yaml -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/maps\n'}
+[0.596045] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/maps/warehouse.pgm -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/maps\n'}
+[0.596079] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/config/mapping.rviz -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config\n'}
+[0.596112] (isaac_slam_config) StdoutLine: {'line': b'symbolically linking /slam_ws/build/isaac_slam_config/config/slam_toolbox_default.rviz -> /slam_ws/install/isaac_slam_config/share/isaac_slam_config/config\n'}
+[0.600592] (-) TimerEvent: {}
+[0.613187] (isaac_slam_config) CommandEnded: {'returncode': 0}
+[0.621366] (isaac_slam_config) JobEnded: {'identifier': 'isaac_slam_config', 'rc': 0}
+[0.621780] (-) EventReactorShutdown: {}

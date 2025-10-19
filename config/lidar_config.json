@@ -1,0 +1,14 @@
+{
+  "configuration": {
+    "numLasers": 16,
+    "rotationRate": 10.0,
+    "range": 20.0,
+    "minRange": 0.1,
+    "horizontalFov": 270.0,
+    "verticalFov": 30.0,
+    "verticalResolution": 2.0,
+    "horizontalResolution": 0.25,
+    "noiseMean": 0.0,
+    "noiseStdDev": 0.02
+  }
+}

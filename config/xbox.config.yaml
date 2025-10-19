@@ -4,7 +4,7 @@ teleop_twist_joy_node:
     enable_turbo_button: 5          # RB (optional turbo mode)
 
     axis_linear.x: 1                # Left stick vertical for forward/backward
-    scale_linear.x: 0.6
+    scale_linear.x: 3.0
     scale_linear_turbo.x: 1.0
 
     axis_angular.yaw: 2             # Right stick horizontal for steering

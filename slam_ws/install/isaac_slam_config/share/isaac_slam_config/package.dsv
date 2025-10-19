@@ -1,0 +1,9 @@
+source;share/isaac_slam_config/hook/pythonpath.ps1
+source;share/isaac_slam_config/hook/pythonpath.dsv
+source;share/isaac_slam_config/hook/pythonpath.sh
+source;share/isaac_slam_config/hook/ament_prefix_path.ps1
+source;share/isaac_slam_config/hook/ament_prefix_path.dsv
+source;share/isaac_slam_config/hook/ament_prefix_path.sh
+source;../../build/isaac_slam_config/share/isaac_slam_config/hook/pythonpath_develop.ps1
+source;../../build/isaac_slam_config/share/isaac_slam_config/hook/pythonpath_develop.dsv
+source;../../build/isaac_slam_config/share/isaac_slam_config/hook/pythonpath_develop.sh

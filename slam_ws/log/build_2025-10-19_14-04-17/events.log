@@ -1,0 +1,27 @@
+[0.000000] (-) TimerEvent: {}
+[0.000222] (isaac_slam_config) JobQueued: {'identifier': 'isaac_slam_config', 'dependencies': OrderedDict()}
+[0.000549] (isaac_slam_config) JobStarted: {'identifier': 'isaac_slam_config'}
+[0.099761] (-) TimerEvent: {}
+[0.199980] (-) TimerEvent: {}
+[0.300208] (-) TimerEvent: {}
+[0.400430] (-) TimerEvent: {}
+[0.442240] (isaac_slam_config) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/slam_ws/build/isaac_slam_config/build', '--no-deps', 'symlink_data'], 'cwd': '/slam_ws/build/isaac_slam_config', 'env': {'HOSTNAME': '53d3e4b14e72', 'MODE': 'navigation', '__GLX_VENDOR_LIBRARY_NAME': 'nvidia', 'SHLVL': '1', 'LIBGL_ALWAYS_SOFTWARE': '0', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/slam_ws', 'ROS_PYTHON_VERSION': '3', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'NVIDIA_DRIVER_CAPABILITIES': 'all', 'TERM': 'xterm', 'LIBGL_ALWAYS_INDIRECT': '0', 'ROS_LOCALHOST_ONLY': '0', 'QT_X11_NO_MITSHM': '1', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'XDG_RUNTIME_DIR': '/tmp/runtime-root', 'DISPLAY': ':1', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_fastrtps_cpp', 'ROS_DOMAIN_ID': '0', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'DEBIAN_FRONTEND': 'noninteractive', 'PWD': '/slam_ws/build/isaac_slam_config', 'QT_QPA_PLATFORM': 'xcb', 'LC_ALL': 'C.UTF-8', 'MESA_GL_VERSION_OVERRIDE': '3.3', 'PYTHONPATH': '/slam_ws/build/isaac_slam_config/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/slam_ws/install/isaac_slam_config/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'NVIDIA_VISIBLE_DEVICES': 'all', 'COLCON': '1', 'MESA_GLSL_VERSION_OVERRIDE': '330'}, 'shell': False}
+[0.500546] (-) TimerEvent: {}
+[0.592862] (isaac_slam_config) StdoutLine: {'line': b'running develop\n'}
+[0.600736] (-) TimerEvent: {}
+[0.663510] (isaac_slam_config) StdoutLine: {'line': b'running egg_info\n'}
+[0.663665] (isaac_slam_config) StdoutLine: {'line': b'writing isaac_slam_config.egg-info/PKG-INFO\n'}
+[0.663782] (isaac_slam_config) StdoutLine: {'line': b'writing dependency_links to isaac_slam_config.egg-info/dependency_links.txt\n'}
+[0.663863] (isaac_slam_config) StdoutLine: {'line': b'writing entry points to isaac_slam_config.egg-info/entry_points.txt\n'}
+[0.663942] (isaac_slam_config) StdoutLine: {'line': b'writing requirements to isaac_slam_config.egg-info/requires.txt\n'}
+[0.664009] (isaac_slam_config) StdoutLine: {'line': b'writing top-level names to isaac_slam_config.egg-info/top_level.txt\n'}
+[0.665098] (isaac_slam_config) StdoutLine: {'line': b"reading manifest file 'isaac_slam_config.egg-info/SOURCES.txt'\n"}
+[0.666044] (isaac_slam_config) StdoutLine: {'line': b"writing manifest file 'isaac_slam_config.egg-info/SOURCES.txt'\n"}
+[0.667473] (isaac_slam_config) StdoutLine: {'line': b'running build_ext\n'}
+[0.667769] (isaac_slam_config) StdoutLine: {'line': b'Creating /slam_ws/install/isaac_slam_config/lib/python3.10/site-packages/isaac-slam-config.egg-link (link to .)\n'}
+[0.668549] (isaac_slam_config) StdoutLine: {'line': b'\n'}
+[0.668841] (isaac_slam_config) StdoutLine: {'line': b'Installed /slam_ws/build/isaac_slam_config\n'}
+[0.668923] (isaac_slam_config) StdoutLine: {'line': b'running symlink_data\n'}
+[0.686977] (isaac_slam_config) CommandEnded: {'returncode': 0}
+[0.698226] (isaac_slam_config) JobEnded: {'identifier': 'isaac_slam_config', 'rc': 0}
+[0.698800] (-) EventReactorShutdown: {}

@@ -8,7 +8,6 @@ services:
     container_name: isaac_slam_container
     runtime: nvidia
     # network_mode: "host"
-    restart: unless-stopped
     tty: true
     deploy:
       resources:
@@ -44,6 +43,7 @@ services:
       - $HOME/.cache/ov:/root/.cache/ov
       - $HOME/.local/share/ov:/root/.local/share/ov
       - /usr/share/vulkan/explicit_layer.d:/usr/share/vulkan/explicit_layer.d:ro  
+      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam/config:/isaac_sim/exts/isaacsim.sensors.rtx/data/lidar_configs/custom_lidar
 
     #entrypoint: ["/isaac_entrypoint.sh"]
     entrypoint : ["/isaac_entrypoint.sh"]
@@ -71,6 +71,7 @@ services:
       # Optional stability flags
       - MESA_GL_VERSION_OVERRIDE=3.3
       - MESA_GLSL_VERSION_OVERRIDE=330
+      - MODE=${MODE:-mapping}
 
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix 
@@ -80,5 +81,24 @@ services:
     tty: true
     stdin_open: true
     entrypoint: ["/slam_entrypoint.sh"]
+    # volumes:
+    #   - ./ros_ws:/ros_ws   # optional, mount your workspace
+
+  teleop_twist_joy_node:
+
+    image: ros2-slam-humble:latest
+    container_name: teleop_twist_joy_container
+    privileged: true
+    environment:
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
+
+    volumes:
+      - /dev/input:/dev/input
+      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam:/isaac_slam 
+    tty: true
+    stdin_open: true
+    entrypoint: ["/controller_entrypoint.sh"]
     # volumes:
     #   - ./ros_ws:/ros_ws   # optional, mount your workspace

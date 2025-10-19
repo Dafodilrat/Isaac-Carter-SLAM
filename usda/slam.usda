@@ -7,8 +7,8 @@
                 double radius = 5
             }
             dictionary Perspective = {
-                double3 position = (-7.4001650849889495, -3.580289383513113, 2.667980001586285)
-                double3 target = (-22.882753882084756, 27.041534142859454, -0.1276764454980377)
+                double3 position = (-24.949786904752123, 1.148571701568848, 0.8730249189370022)
+                double3 target = (-71.87286594357123, -3.338437754754195, -15.203873825168802)
             }
             dictionary Right = {
                 double3 position = (0, -5, 0)
@@ -124,7 +124,7 @@ def Xform "World"
     {
         quatd xformOp:orient = (1, 0, 0, 0)
         double3 xformOp:scale = (1, 1, 1)
-        double3 xformOp:translate = (-8.856132507324219, 0, 1.8062578439712524)
+        double3 xformOp:translate = (-25.565567016601562, 1.1087687015533447, 0.2789292633533478)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "chassis_link" (
@@ -132,6 +132,10 @@ def Xform "World"
             prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI"]
         )
         {
+            custom string isaac:nameOverride = "base_link" (
+                displayName = "Name Override"
+                doc = "Name override for prim lookup in base name search"
+            )
             bool physics:kinematicEnabled = 0
             bool physics:rigidBodyEnabled = 1
             quatf xformOp:orient = (0.9999977, -3.408666e-7, 0.0021561903, -4.1827877e-7)
@@ -154,7 +158,41 @@ def Xform "World"
                 {
                     uniform token physics:approximation = "convexHull"
                     bool physics:collisionEnabled = 1
+                    quatf xformOp:orient = (1, 0, 0, 0)
+                    float3 xformOp:scale = (0.01, 0.01, 0.01)
+                    double3 xformOp:translate = (0, 0, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
                 }
+            }
+
+            over "camera_mount"
+            {
+                over "carter_camera_third_person"
+                {
+                    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -6.230315575065936)
+                    float3 xformOp:rotateZYX = (14.811114, -81.44315, -75.08639)
+                    float3 xformOp:scale = (1.0000008, 1, 1.0000027)
+                    float3 xformOp:translate = (-1.5877599, -0.017427355, 0.7633578)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZYX", "xformOp:scale"]
+                }
+            }
+
+            over "rear_pivot" (
+                active = false
+            )
+            {
+            }
+
+            def PhysicsFixedJoint "rear_pivot_01"
+            {
+                rel physics:body0 = </World/carter_v1/rear_pivot_link>
+                rel physics:body1 = </World/carter_v1/chassis_link>
+                float physics:breakForce = inf
+                float physics:breakTorque = inf
+                point3f physics:localPos0 = (0.3164617, -2.1441795e-7, 0.07442946)
+                point3f physics:localPos1 = (0, 0, 0)
+                quatf physics:localRot0 = (0.9999977, -3.408666e-7, 0.0021561903, -4.1827877e-7)
+                quatf physics:localRot1 = (1, 0, 0, 0)
             }
         }
 
@@ -191,7 +229,7 @@ def Xform "World"
             bool physics:rigidBodyEnabled = 1
             quatd xformOp:orient = (1, 0, 0, 0)
             double3 xformOp:scale = (0.6857264637947083, 0.6399999856948853, 0.6399999856948853)
-            double3 xformOp:translate = (-0.05690209749343822, 0, 0.37821510576766587)
+            double3 xformOp:translate = (-0.05690209749345598, 2.220446049250313e-16, 0.38167402525124094)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def PhysicsFixedJoint "FixedJoint"
@@ -200,10 +238,20 @@ def Xform "World"
                 rel physics:body1 = </World/carter_v1/Velodyne_VLS_128>
                 float physics:breakForce = inf
                 float physics:breakTorque = inf
-                point3f physics:localPos0 = (-0.05916928, -3.1842583e-7, 0.3880898)
-                point3f physics:localPos1 = (0, 0, 0)
+                point3f physics:localPos0 = (-0.059487928, -3.689592e-7, 0.46201873)
+                point3f physics:localPos1 = (2.416864e-7, -2.220446e-16, -0.005719938)
                 quatf physics:localRot0 = (0.9999977, 3.408666e-7, -0.0021561903, 4.1827877e-7)
                 quatf physics:localRot1 = (1, 0, 0, 0)
+            }
+
+            over "Velodyne_VLS_128"
+            {
+                float focalLength = 5
+                string sensorModelConfig = "Velodyne_VLS128"
+                quatd xformOp:orient = (1, 0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
             }
         }
 
@@ -338,7 +386,7 @@ def "Graph"
                 }
             )
             prepend uint inputs:execIn.connect = </Graph/ROS_LidarRTX/RenderProduct.outputs:execOut>
-            custom string inputs:frameId = "chasis_link"
+            custom string inputs:frameId = "chassis_link"
             custom uint inputs:frameSkipCount
             custom bool inputs:fullScan = 0
             custom string inputs:nodeNamespace = "/carter"
@@ -482,7 +530,7 @@ def "Graph"
 
         def OmniGraphNode "TFWorld2Odom"
         {
-            custom string inputs:childFrameId = "odom"
+            custom string inputs:childFrameId = "base_link"
             custom uint64 inputs:context
             prepend uint64 inputs:context.connect = </Graph/ROS_Odometry/Context.outputs:context>
             custom uint inputs:execIn (
@@ -492,7 +540,7 @@ def "Graph"
             )
             prepend uint inputs:execIn.connect = </Graph/ROS_Odometry/OnPlaybackTick.outputs:tick>
             custom string inputs:nodeNamespace = ""
-            custom string inputs:parentFrameId = "world"
+            custom string inputs:parentFrameId = "odom"
             custom string inputs:qosProfile
             custom uint64 inputs:queueSize
             custom quatd inputs:rotation
@@ -507,7 +555,7 @@ def "Graph"
 
         def OmniGraphNode "TFOdom2Robot"
         {
-            custom string inputs:childFrameId = "chasis_link"
+            custom string inputs:childFrameId = "chassis_link"
             custom uint64 inputs:context
             prepend uint64 inputs:context.connect = </Graph/ROS_Odometry/Context.outputs:context>
             custom uint inputs:execIn (
@@ -568,7 +616,7 @@ def "Graph"
         {
             custom vector3d inputs:angularVelocity
             prepend vector3d inputs:angularVelocity.connect = </Graph/ROS_Odometry/ComputeOdometry.outputs:angularVelocity>
-            custom string inputs:chassisFrameId = "chassis_link"
+            custom string inputs:chassisFrameId = "base_link"
             custom uint64 inputs:context
             prepend uint64 inputs:context.connect = </Graph/ROS_Odometry/Context.outputs:context>
             custom uint inputs:execIn (
@@ -590,12 +638,14 @@ def "Graph"
             custom vector3d inputs:robotFront
             custom double inputs:timeStamp
             prepend double inputs:timeStamp.connect = </Graph/ROS_Odometry/ReadSimTime.outputs:simulationTime>
-            custom string inputs:topicName = "/odom"
+            custom string inputs:topicName = "odom"
             token node:type = "isaacsim.ros2.bridge.ROS2PublishOdometry"
             int node:typeVersion = 1
         }
 
-        def OmniGraphNode "TFRobot"
+        def OmniGraphNode "TFRobot" (
+            active = true
+        )
         {
             custom uint64 inputs:context
             prepend uint64 inputs:context.connect = </Graph/ROS_Odometry/Context.outputs:context>
@@ -617,7 +667,7 @@ def "Graph"
             )
             custom string inputs:qosProfile
             custom uint64 inputs:queueSize
-            custom bool inputs:staticPublisher
+            custom bool inputs:staticPublisher = 1
             custom rel inputs:targetPrims = </World/carter_v1/chassis_link> (
                 customData = {
                     dictionary omni = {
@@ -629,7 +679,7 @@ def "Graph"
             )
             custom double inputs:timeStamp
             prepend double inputs:timeStamp.connect = </Graph/ROS_Odometry/ReadSimTime.outputs:simulationTime>
-            custom string inputs:topicName = "/tf"
+            custom string inputs:topicName = "tf"
             token node:type = "isaacsim.ros2.bridge.ROS2PublishTransformTree"
             int node:typeVersion = 1
         }
@@ -673,14 +723,14 @@ def "Graph"
             prepend uint inputs:execIn.connect = </Graph/differential_controller/ros2_subscribe_twist.outputs:execOut>
             custom double inputs:linearVelocity
             prepend double inputs:linearVelocity.connect = </Graph/differential_controller/break_3_vector.outputs:x>
-            custom double inputs:maxAcceleration
-            custom double inputs:maxAngularAcceleration
-            custom double inputs:maxAngularSpeed = 0.2
+            custom double inputs:maxAcceleration = 1
+            custom double inputs:maxAngularAcceleration = 0
+            custom double inputs:maxAngularSpeed = 0
             custom double inputs:maxDeceleration
-            custom double inputs:maxLinearSpeed = 0
-            custom double inputs:maxWheelSpeed = 0
-            custom double inputs:wheelDistance = 0.012500000186264515
-            custom double inputs:wheelRadius = 0.029999999329447746
+            custom double inputs:maxLinearSpeed = 3
+            custom double inputs:maxWheelSpeed = 5
+            custom double inputs:wheelDistance = 0.6
+            custom double inputs:wheelRadius = 0.21
             token node:type = "isaacsim.robot.wheeled_robots.DifferentialController"
             int node:typeVersion = 1
             custom double[] outputs:velocityCommand
@@ -700,7 +750,7 @@ def "Graph"
             )
             prepend uint inputs:execIn.connect = </Graph/differential_controller/OnPlaybackTick.outputs:tick>
             custom int[] inputs:jointIndices
-            custom token[] inputs:jointNames = ["right_wheel", "left_wheel"]
+            custom token[] inputs:jointNames = []
             custom double[] inputs:positionCommand
             custom string inputs:robotPath = ""
             custom rel inputs:targetPrim = </World/carter_v1> (
@@ -790,7 +840,7 @@ def "Graph"
             custom token outputs:y
             custom token outputs:z
             uniform token ui:nodegraph:node:expansionState = "open"
-            uniform float2 ui:nodegraph:node:pos = (-361.14243, 423.12686)
+            uniform float2 ui:nodegraph:node:pos = (-362.1816, 422.08765)
         }
 
         def OmniGraphNode "print_text" (
@@ -858,6 +908,13 @@ over "SM_RackShelf_3827"
 }
 
 over "SM_RackShelf_3828"
+{
+}
+
+def "Viewport_Measure" (
+    hide_in_stage_window = true
+    no_delete = true
+)
 {
 }
 

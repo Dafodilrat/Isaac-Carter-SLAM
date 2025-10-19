@@ -1,0 +1,14 @@
+running develop
+running egg_info
+writing isaac_slam_config.egg-info/PKG-INFO
+writing dependency_links to isaac_slam_config.egg-info/dependency_links.txt
+writing entry points to isaac_slam_config.egg-info/entry_points.txt
+writing requirements to isaac_slam_config.egg-info/requires.txt
+writing top-level names to isaac_slam_config.egg-info/top_level.txt
+reading manifest file 'isaac_slam_config.egg-info/SOURCES.txt'
+writing manifest file 'isaac_slam_config.egg-info/SOURCES.txt'
+running build_ext
+Creating /slam_ws/install/isaac_slam_config/lib/python3.10/site-packages/isaac-slam-config.egg-link (link to .)
+
+Installed /slam_ws/build/isaac_slam_config
+running symlink_data
