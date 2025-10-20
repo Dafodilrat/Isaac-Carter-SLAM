@@ -16,7 +16,7 @@ ENV DOCKER_USER_HOME=/root
 # Python venv
 ENV VIRTUAL_ENV=/isaac
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-RUN apt update && apt install -y python3-pip ros-humble-rviz2 && pip install --upgrade pip
+RUN apt update && apt install -y python3-pip  && pip install --upgrade pip
 
 # Basic utilities
 RUN apt-get update && apt-get install -y \
@@ -47,6 +47,10 @@ RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
 COPY docker/entrypoints/isaac_entrypoint.sh /isaac_entrypoint.sh
 
 RUN chmod +x /isaac_entrypoint.sh
+
+RUN apt update && apt install -y libglu1-mesa ros-humble-rmw-fastrtps-cpp
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib
 
 # ros2 workspace setup
 WORKDIR /IsaacPanda

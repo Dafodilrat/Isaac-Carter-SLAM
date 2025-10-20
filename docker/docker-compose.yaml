@@ -24,7 +24,6 @@ services:
       - OMNI_KIT_ALLOW_ROOT=1
       - X11_FORWARDING_ENABLED=1
       - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-      - LD_LIBRARY_PATH=/isaac-sim/exts/isaacsim.ros2.bridge/humble/lib:$LD_LIBRARY_PATH
       - ROS_DOMAIN_ID=0
       - ROS_DISTRO=humble
       - KIT_DISABLE_CRASH_REPORTING=1
@@ -33,18 +32,20 @@ services:
       - __GL_SYNC_TO_VBLANK=0
       - ENABLE_AFTERMATH=0
       - PHYSX_WARMSTART=0
+      - XDG_RUNTIME_DIR=/tmp
+      - WAYLAND_DISPLAY=$WAYLAND_DISPLAY
 
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix 
       - $HOME/.Xauthority:/root/.Xauthority:rw  
-      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam:/isaac_slam
+      - /home/dafodilrat/Documents/projects/Isaac-Carter-SLAM:/isaac_slam
       - $HOME/.nvidia-omniverse:/root/.nvidia-omniverse
       - $HOME/.cache/warp:/root/.cache/warp
       - $HOME/.cache/ov:/root/.cache/ov
       - $HOME/.local/share/ov:/root/.local/share/ov
-      - /usr/share/vulkan/explicit_layer.d:/usr/share/vulkan/explicit_layer.d:ro  
-      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam/config:/isaac_sim/exts/isaacsim.sensors.rtx/data/lidar_configs/custom_lidar
-
+      - /usr/share/vulkan/explicit_layer.d:/usr/share/vulkan/explicit_layer.d:ro
+      - $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY
+    
     #entrypoint: ["/isaac_entrypoint.sh"]
     entrypoint : ["/isaac_entrypoint.sh"]
   ros2_slam:
@@ -76,7 +77,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix 
       - $HOME/.Xauthority:/root/.Xauthority:rw
-      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam/slam_ws:/slam_ws
+      - /home/dafodilrat/Documents/projects/Isaac-Carter-SLAM/slam_ws:/slam_ws
       - /dev/input:/dev/input 
     tty: true
     stdin_open: true
@@ -96,7 +97,7 @@ services:
 
     volumes:
       - /dev/input:/dev/input
-      - /home/dafodilrat/Documents/bu/RASTIC/isaac_slam:/isaac_slam 
+      - /home/dafodilrat/Documents/projects/Isaac-Carter-SLAM:/isaac_slam
     tty: true
     stdin_open: true
     entrypoint: ["/controller_entrypoint.sh"]
